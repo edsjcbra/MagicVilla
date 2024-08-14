@@ -1,0 +1,15 @@
+{
+  "version": 2,
+  "dgSpecHash": "N01HBp4/C0I2Z8GljpiptHkgKkLK9k2BGNG0DsVsRdsg3GOmNchR3SruOQDFlktp5Tvz2Y8n924/cR+ay5UVkg==",
+  "success": true,
+  "projectFilePath": "C:\\Users\\edsjc\\OneDrive\\Documents\\.NET\\MagicVilla\\MagicVillaAPI\\MagicVillaAPI.csproj",
+  "expectedPackageFiles": [
+    "C:\\Users\\edsjc\\.nuget\\packages\\microsoft.extensions.apidescription.server\\6.0.5\\microsoft.extensions.apidescription.server.6.0.5.nupkg.sha512",
+    "C:\\Users\\edsjc\\.nuget\\packages\\microsoft.openapi\\1.2.3\\microsoft.openapi.1.2.3.nupkg.sha512",
+    "C:\\Users\\edsjc\\.nuget\\packages\\swashbuckle.aspnetcore\\6.4.0\\swashbuckle.aspnetcore.6.4.0.nupkg.sha512",
+    "C:\\Users\\edsjc\\.nuget\\packages\\swashbuckle.aspnetcore.swagger\\6.4.0\\swashbuckle.aspnetcore.swagger.6.4.0.nupkg.sha512",
+    "C:\\Users\\edsjc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggergen\\6.4.0\\swashbuckle.aspnetcore.swaggergen.6.4.0.nupkg.sha512",
+    "C:\\Users\\edsjc\\.nuget\\packages\\swashbuckle.aspnetcore.swaggerui\\6.4.0\\swashbuckle.aspnetcore.swaggerui.6.4.0.nupkg.sha512"
+  ],
+  "logs": []
+}
