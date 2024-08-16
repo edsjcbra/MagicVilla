@@ -69,6 +69,7 @@ public class VillaAPIController : ControllerBase
     }
 
     [HttpDelete("{id:int}")]
+    [ProducesResponseType(StatusCodes.Status200OK)]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     [ProducesResponseType(StatusCodes.Status400BadRequest)]
@@ -87,7 +88,7 @@ public class VillaAPIController : ControllerBase
 
         _villaDb.RemoveAsync(villa);
 
-        return NoContent();
+        return Ok();
     }
     [HttpPut("{id:int}")]
     [ProducesResponseType(StatusCodes.Status204NoContent)]
