@@ -1,3 +1,4 @@
+using MagicVillaAPI;
 using MagicVillaAPI.Data;
 using Microsoft.EntityFrameworkCore;
 
@@ -15,6 +16,8 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 {
     option.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection"));
 });
+//AUTOMAPPER
+builder.Services.AddAutoMapper(typeof(MappingConfig));
 
 var app = builder.Build();
 
