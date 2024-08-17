@@ -22,7 +22,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 builder.Services.AddAutoMapper(typeof(MappingConfig));
 //INTERFACES
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
-
+builder.Services.AddScoped<IVillaNumberRepository, VillaNumberRepository>();
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
