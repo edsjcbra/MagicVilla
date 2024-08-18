@@ -1,6 +1,7 @@
 ﻿using System.Net;
 using AutoMapper;
 using MagicVillaAPI.Models;
+using MagicVillaAPI.Models.Dto;
 using MagicVillaAPI.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
 

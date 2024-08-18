@@ -1,0 +1,13 @@
+﻿@model IEnumerable<VillaDTO>
+
+@{
+    ViewData["Title"] = "Privacy Policy";
+}
+<h1>@ViewData["Title"]</h1>
+
+@foreach (var villa in Model)
+{
+    <p>@villa.Name</p>
+}
+
+<p>Use this page to detail your site's privacy policy.</p>
