@@ -16,8 +16,7 @@
     </ItemGroup>
 
     <ItemGroup>
-      <AdditionalFiles Include="Views\Villa\Index.cshtml" />
-      <AdditionalFiles Include="Views\Villa\IndexVilla.cshtml" />
+      <Compile Remove="Views\Villa\Create.cshtml.cs" />
     </ItemGroup>
 
 </Project>

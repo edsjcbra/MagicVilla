@@ -1,0 +1,80 @@
+﻿@model VillaDTO
+
+@{
+    ViewData["Title"] = "Delete Villa";
+}
+<div class="container p-4 border mt-3">
+    <div class="row pb-2 mt-3">
+        <div class="col">
+            <h1 class="text-primary">Delete Villa</h1>
+        </div>
+        <form asp-action="DeleteVilla">
+            <input type="hidden" asp-for="Id"/>
+            <br/>
+            <div class="row">
+                <div class="col-2">
+                    <label asp-for="Name" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input asp-for="Name" disabled class="form-control"/>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="col-2">
+                    <label asp-for="Rate" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input asp-for="Rate" disabled class="form-control"/>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="col-2">
+                    <label asp-for="Details" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <textarea asp-for="Details" disabled class="form-control" rows="5"></textarea>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="col-2">
+                    <label asp-for="ImageUrl" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input asp-for="ImageUrl" disabled class="form-control"/>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="col-2">
+                    <label asp-for="Occupancy" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input asp-for="Occupancy" disabled class="form-control"/>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="col-2">
+                    <label asp-for="Sqrft" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <input asp-for="Sqrft" disabled class="form-control"/>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="col-2">
+                    <label asp-for="Amenity" class="control-label pt-2" style="font-size:20px;"></label>
+                </div>
+                <div class="col-10 pb-3">
+                    <textarea asp-for="Amenity" disabled class="form-control"></textarea>
+                </div>
+                @*-------------------------------------------------------------------------*@
+                <div class="d-inline-flex justify-content-center">
+                    <a asp-controller="Villa" asp-action="Index" class="btn-primary btn form-control" style="width: 300px; margin-right: 10px;">Back</a>
+                    <br/>
+                    <input type="submit" value="Delete" class="btn btn-danger form-control" style="width: 300px;"/>
+                </div>
+            </div>
+        </form>
+        
+    </div>
+    
+</div>
+
+
+@section Scripts
+{
+    <partial name="_ValidationScriptsPartial"/>
+}
