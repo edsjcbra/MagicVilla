@@ -83,19 +83,18 @@ public class VillaNumberAPIController : ControllerBase
         {
             if (await _villaNumberDb.GetAsync(x => x.VillaNo == villaNumberCreateDTO.VillaNo) != null)
             {
-                ModelState.AddModelError("CustomError", "Villa Number already exists");
+                ModelState.AddModelError("ErrorMessages", "Villa Number already exists");
                 return BadRequest(ModelState);
             }
             if (await _villaRepository.GetAsync(x => x.Id == villaNumberCreateDTO.VillaID) == null)
             {
-                ModelState.AddModelError("CustomError", "Villa ID is invalid.");
+                ModelState.AddModelError("ErrorMessages", "Villa ID is Invalid.");
                 return BadRequest(ModelState);
             }
 
             if (villaNumberCreateDTO == null)
             {
-                _response.StatusCode = HttpStatusCode.BadRequest;
-                return BadRequest(_response);
+                return BadRequest(villaNumberCreateDTO);
             }
 
             VillaNumber villaNumber = _mapper.Map<VillaNumber>(villaNumberCreateDTO);
@@ -161,7 +160,7 @@ public class VillaNumberAPIController : ControllerBase
             }
             if (await _villaRepository.GetAsync(x => x.Id == villaNumberUpdateDTO.VillaID) == null)
             {
-                ModelState.AddModelError("CustomError", "Villa ID is invalid.");
+                ModelState.AddModelError("ErrorMessages", "Villa ID is invalid.");
                 return BadRequest(ModelState);
             }
             VillaNumber villaNumber = _mapper.Map<VillaNumber>(villaNumberUpdateDTO);
