@@ -70,6 +70,7 @@ public class VillaController : Controller
             var response = await _villaService.CreateAsync<APIResponse>(villaToCreate);
             if (response != null && response.IsSuccess)
             {
+                TempData["success"] = "Villa created successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -84,6 +85,7 @@ public class VillaController : Controller
             var response = await _villaService.UpdateAsync<APIResponse>(villaToUpdate);
             if (response != null && response.IsSuccess)
             {
+                TempData["success"] = "Villa Updated successfully";
                 return RedirectToAction(nameof(Index));
             }
         }
@@ -96,6 +98,7 @@ public class VillaController : Controller
             var response = await _villaService.DeleteAsync<APIResponse>(villaToDelete.Id);
             if (response != null && response.IsSuccess)
             {
+                TempData["success"] = "Villa Deleted successfully";
                 return RedirectToAction(nameof(Index));
             }
             return View(villaToDelete);

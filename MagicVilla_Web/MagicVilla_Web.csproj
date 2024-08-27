@@ -19,4 +19,8 @@
       <Compile Remove="Views\Villa\Create.cshtml.cs" />
     </ItemGroup>
 
+    <ItemGroup>
+      <Content Remove="Views\Shared\_SweetAlertPartial.cshtml" />
+    </ItemGroup>
+
 </Project>
