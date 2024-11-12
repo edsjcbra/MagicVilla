@@ -1,8 +1,8 @@
-﻿using MagicVilla.Api.Data;
+﻿using AutoMapper;
 using MagicVilla.Api.Models;
 using MagicVilla.Api.Models.DTOs;
+using MagicVilla.Api.Repository.IRepository;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 
 namespace MagicVilla.Api.Controllers;
 
@@ -10,16 +10,19 @@ namespace MagicVilla.Api.Controllers;
 [ApiController]
 public class VillaApiController : ControllerBase
 {
-    private readonly AppDbContext _db;
-    public VillaApiController(AppDbContext db)
+    private readonly IVillaRepository _db;
+    private readonly IMapper _mapper;
+    public VillaApiController(IVillaRepository db, IMapper mapper)
     {
         _db = db;
+        _mapper = mapper;
     }
     [HttpGet]
     [ProducesResponseType(StatusCodes.Status200OK)]
     public async Task<ActionResult<IEnumerable<VillaDTO>>> GetVillas()
     {
-        return Ok(await _db.Villas.ToListAsync());
+        IEnumerable<Villa> villasList = await _db.GetAllAsync();
+        return Ok(_mapper.Map<List<VillaDTO>>(villasList));
     }
     
     [HttpGet("{id:int}", Name = "GetVilla")]
@@ -33,12 +36,12 @@ public class VillaApiController : ControllerBase
             return BadRequest();
         }
 
-        var villa = await _db.Villas.FirstOrDefaultAsync(x => x.Id == id);
+        var villa = await _db.GetAsync(x => x.Id == id);
         if (villa == null)
         {
             return NotFound();
         }
-        return Ok(villa);
+        return Ok(_mapper.Map<VillaDTO>(villa));
     }
     
     [HttpPost]
@@ -47,7 +50,7 @@ public class VillaApiController : ControllerBase
     [ProducesResponseType(StatusCodes.Status404NotFound)]
     public async Task<ActionResult<VillaDTO?>> CreateVilla([FromBody] CreateVillaDTO villaToCreate)
     {
-        if (await _db.Villas.FirstOrDefaultAsync(x => x.Name.ToLower() == villaToCreate.Name.ToLower()) != null)
+        if (await _db.GetAsync(x => x.Name.ToLower() == villaToCreate.Name.ToLower()) != null)
         {
             ModelState.AddModelError("CustomError", "Villa already exists !");
             return BadRequest(ModelState);
@@ -57,19 +60,9 @@ public class VillaApiController : ControllerBase
             return BadRequest();
         }
 
-        Villa villaToDb = new()
-        {
-            Name = villaToCreate.Name,
-            Details = villaToCreate.Details,
-            Rate = villaToCreate.Rate,
-            Occupancy = villaToCreate.Occupancy,
-            Sqft = villaToCreate.Sqft,
-            ImageUrl = villaToCreate.ImageUrl,
-            Amenity = villaToCreate.Amenity
-        };
-
-        await _db.Villas.AddAsync(villaToDb);
-        await _db.SaveChangesAsync();
+        Villa villaToDb = _mapper.Map<Villa>(villaToCreate);
+        
+        await _db.CreateAsync(villaToDb);
 
         return CreatedAtRoute("GetVilla", new{id = villaToDb.Id}, villaToDb);
     }
@@ -84,25 +77,15 @@ public class VillaApiController : ControllerBase
         {
             return BadRequest();
         }
-        if (await _db.Villas.FirstOrDefaultAsync(x => x.Name.ToLower() == villaToUpdate.Name.ToLower()) != null)
+        if (await _db.GetAsync(x => x.Name.ToLower() == villaToUpdate.Name.ToLower()) != null)
         {
             ModelState.AddModelError("CustomError", "Villa already exists !");
             return BadRequest(ModelState);
         }
-        Villa villaUpdatedToDb = new()
-        {
-            Id = villaToUpdate.Id,
-            Name = villaToUpdate.Name,
-            Details = villaToUpdate.Details,
-            Rate = villaToUpdate.Rate,
-            Occupancy = villaToUpdate.Occupancy,
-            Sqft = villaToUpdate.Sqft,
-            ImageUrl = villaToUpdate.ImageUrl,
-            Amenity = villaToUpdate.Amenity,
-            UpdatedDate = DateTime.Now
-        };
-        _db.Villas.Update(villaUpdatedToDb);
-        await _db.SaveChangesAsync();
+
+        Villa villaUpdatedToDb = _mapper.Map<Villa>(villaToUpdate);
+        
+        await _db.UpdateAsync(villaUpdatedToDb);
 
         return NoContent();
     }
@@ -117,13 +100,12 @@ public class VillaApiController : ControllerBase
         {
             return BadRequest();
         }
-        var villaToDelete = await _db.Villas.FirstOrDefaultAsync(x => x.Id == id);
+        var villaToDelete = await _db.GetAsync(x => x.Id == id);
         if (villaToDelete == null)
         {
             return NotFound();
         }
-        _db.Villas.Remove(villaToDelete);
-        await _db.SaveChangesAsync();
+        await _db.RemoveAsync(villaToDelete);
         return NoContent();
     }
 }
