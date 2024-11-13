@@ -2,6 +2,7 @@ using MagicVilla.Api;
 using MagicVilla.Api.Data;
 using MagicVilla.Api.Repository;
 using MagicVilla.Api.Repository.IRepository;
+using MagicVillaAPI.Repository;
 using Microsoft.EntityFrameworkCore;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,7 @@ builder.Services.AddDbContext<AppDbContext>(option =>
 });
 //INTERFACES
 builder.Services.AddScoped<IVillaRepository, VillaRepository>();
+builder.Services.AddScoped<IUserRepository, UserRepository>();
 
 //AUTOMAPPER
 builder.Services.AddAutoMapper(typeof(MappingConfig));
